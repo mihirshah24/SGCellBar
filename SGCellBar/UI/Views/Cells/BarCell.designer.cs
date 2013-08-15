@@ -1,0 +1,40 @@
+// WARNING
+//
+// This file has been generated automatically by Xamarin Studio to store outlets and
+// actions made in the Xcode designer. If it is removed, they will be lost.
+// Manual changes to this file may not be handled correctly.
+//
+using MonoTouch.Foundation;
+
+namespace SGCellBar.UI.Views.Cells
+{
+	partial class BarCell
+	{
+		[Outlet]
+		MonoTouch.UIKit.UIButton ButtonLeft { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UIButton ButtonRight { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UILabel UILabelHeader { get; set; }
+		
+		void ReleaseDesignerOutlets ()
+		{
+			if (UILabelHeader != null) {
+				UILabelHeader.Dispose ();
+				UILabelHeader = null;
+			}
+
+			if (ButtonRight != null) {
+				ButtonRight.Dispose ();
+				ButtonRight = null;
+			}
+
+			if (ButtonLeft != null) {
+				ButtonLeft.Dispose ();
+				ButtonLeft = null;
+			}
+		}
+	}
+}
