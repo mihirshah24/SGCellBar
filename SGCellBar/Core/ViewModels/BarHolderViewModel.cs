@@ -98,14 +98,11 @@ namespace SGCellBar.Core.ViewModels
 			        break;
 			}
 
-            var barViewModel = new BarViewModel { Header = headerText };
-            var collection = new ObservableCollection<BarCollectionViewModel>();
-            collection.Add(new BarCollectionViewModel { Header = "View 1" });
-            collection.Add(new BarCollectionViewModel { Header = "View 2" });
-            collection.Add(new BarCollectionViewModel { Header = "View 3" });
-            collection.Add(new BarCollectionViewModel { Header = "View 4" });
-            collection.Add(new BarCollectionViewModel { Header = "View 5" });
-            barViewModel.Views = collection;
+            var barViewModel = new BarViewModel { Header = headerText };            
+			barViewModel.Views.Add (new BarCollectionViewModel { Header = "View 1" });
+			barViewModel.Views.Add (new BarCollectionViewModel { Header = "View 2" });
+			barViewModel.Views.Add (new BarCollectionViewModel { Header = "View 3" });
+			barViewModel.Views.Add (new BarCollectionViewModel { Header = "View 4" });
             Bars.Add(barViewModel);
 			++i;
         }

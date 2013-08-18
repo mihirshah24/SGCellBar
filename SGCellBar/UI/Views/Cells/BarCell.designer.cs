@@ -17,13 +17,21 @@ namespace SGCellBar.UI.Views.Cells
 		MonoTouch.UIKit.UIButton ButtonRight { get; set; }
 
 		[Outlet]
+		MonoTouch.UIKit.UICollectionView CollectionView { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UILabel UILabelHeader { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (UILabelHeader != null) {
-				UILabelHeader.Dispose ();
-				UILabelHeader = null;
+			if (CollectionView != null) {
+				CollectionView.Dispose ();
+				CollectionView = null;
+			}
+
+			if (ButtonLeft != null) {
+				ButtonLeft.Dispose ();
+				ButtonLeft = null;
 			}
 
 			if (ButtonRight != null) {
@@ -31,9 +39,9 @@ namespace SGCellBar.UI.Views.Cells
 				ButtonRight = null;
 			}
 
-			if (ButtonLeft != null) {
-				ButtonLeft.Dispose ();
-				ButtonLeft = null;
+			if (UILabelHeader != null) {
+				UILabelHeader.Dispose ();
+				UILabelHeader = null;
 			}
 		}
 	}

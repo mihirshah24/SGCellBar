@@ -89,7 +89,7 @@ namespace SGCellBar.UI.Views
             /// <returns></returns>
             public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
             {
-                return 40.0f;
+                return 240.0f;
             }
 
             /// <summary>

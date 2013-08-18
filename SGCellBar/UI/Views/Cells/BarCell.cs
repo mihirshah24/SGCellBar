@@ -7,6 +7,7 @@ using SGCellBar.Core.ViewModels;
 
 namespace SGCellBar.UI.Views.Cells
 {
+
     /// <summary>
     /// Corresponds to each table cell that holds collectionview. Inherits <see cref="MvxTableViewCell"/>
     /// </summary>
@@ -31,6 +32,28 @@ namespace SGCellBar.UI.Views.Cells
             });
         }
 
+        /// <summary>
+        /// To be added.
+        /// </summary>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
+		public override void AwakeFromNib ()
+		{
+			base.AwakeFromNib ();
+
+			CollectionView.RegisterNibForCell(BarCollectionCell.Nib, BarCollectionCell.Key);
+			var source = new MvxCollectionViewSource(CollectionView, BarCollectionCell.Key);
+			CollectionView.Source = source;
+
+			var set = this.CreateBindingSet<BarCell, BarViewModel>();
+			set.Bind(source).To(vm => vm.Views);
+			set.Apply();
+
+            // With Paging enabled, each view will snap to the edges of the frame as they scroll.
+            //CollectionView.PagingEnabled = true;
+			CollectionView.ReloadData();
+		}
 
         /// <summary>
         /// Creates this instance.
