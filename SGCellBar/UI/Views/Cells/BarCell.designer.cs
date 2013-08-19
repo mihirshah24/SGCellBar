@@ -21,14 +21,12 @@ namespace SGCellBar.UI.Views.Cells
 
 		[Outlet]
 		MonoTouch.UIKit.UILabel UILabelHeader { get; set; }
+
+		[Action ("HandleButtonRightTouchUpInside:")]
+		partial void HandleButtonRightTouchUpInside (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (CollectionView != null) {
-				CollectionView.Dispose ();
-				CollectionView = null;
-			}
-
 			if (ButtonLeft != null) {
 				ButtonLeft.Dispose ();
 				ButtonLeft = null;
@@ -37,6 +35,11 @@ namespace SGCellBar.UI.Views.Cells
 			if (ButtonRight != null) {
 				ButtonRight.Dispose ();
 				ButtonRight = null;
+			}
+
+			if (CollectionView != null) {
+				CollectionView.Dispose ();
+				CollectionView = null;
 			}
 
 			if (UILabelHeader != null) {

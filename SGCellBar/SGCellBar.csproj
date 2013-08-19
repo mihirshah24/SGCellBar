@@ -124,6 +124,7 @@
   <ItemGroup>
     <Compile Include="Core\App.cs" />
     <Compile Include="Core\ViewModels\BarViewModel.cs" />
+    <Compile Include="Core\ViewModels\BarViewModelTwo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="UI\Setup.cs" />

@@ -82,28 +82,37 @@ namespace SGCellBar.Core.ViewModels
         {
             IsAddBarClicked = true;
 			string headerText = "Default";
+
+            IBarViewModel barViewModel = null;
 			switch (i)
 			{
 			    case 0: 
 				    headerText = "Home";
+                    barViewModel = new BarViewModel { Header = headerText };
 				    break;
 			    case 1:
 				    headerText = "Inbox";
+                    barViewModel = new BarViewModelTwo { Header = headerText };
 				    break;
 			    case 2:
 				    headerText = "Itemized Bill";
+                    barViewModel = new BarViewModel { Header = headerText };
 				    break;
 			    case 3: 
 				    headerText = "Description";
+                    barViewModel = new BarViewModelTwo { Header = headerText };
 			        break;
 			}
 
-            var barViewModel = new BarViewModel { Header = headerText };            
-			barViewModel.Views.Add (new BarCollectionViewModel { Header = "View 1" });
-			barViewModel.Views.Add (new BarCollectionViewModel { Header = "View 2" });
-			barViewModel.Views.Add (new BarCollectionViewModel { Header = "View 3" });
-			barViewModel.Views.Add (new BarCollectionViewModel { Header = "View 4" });
-            Bars.Add(barViewModel);
+            if (barViewModel != null)
+            {
+                barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 1" });
+                barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 2" });
+                barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 3" });
+                barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 4" });
+                Bars.Add(barViewModel);
+            }
+			
 			++i;
         }
 	}

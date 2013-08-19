@@ -1,18 +1,28 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone.6.1" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SGCellBar/UI/Views/TestView.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SGCellBar/UI/Views/Cells/BarCell.cs">
     <Files>
-      <File FileName="SGCellBar/Main.cs" Line="17" Column="4" />
-      <File FileName="SGCellBar/UI/Views/TestView.designer.cs" Line="23" Column="33" />
-      <File FileName="SGCellBar/UI/Views/TestView.cs" Line="13" Column="18" />
+      <File FileName="SGCellBar/Main.cs" Line="1" Column="1" />
+      <File FileName="SGCellBar/UI/Views/TestView.designer.cs" Line="1" Column="1" />
+      <File FileName="SGCellBar/UI/Views/TestView.cs" Line="1" Column="1" />
+      <File FileName="SGCellBar/UI/Views/Cells/BarCell.cs" Line="31" Column="17" />
+      <File FileName="SGCellBar/Core/ViewModels/BarHolderViewModel.cs" Line="1" Column="1" />
+      <File FileName="SGCellBar/Core/ViewModels/BarViewModel.cs" Line="1" Column="1" />
+      <File FileName="SGCellBar/UI/Views/Cells/BarCollectionCell.cs" Line="1" Column="1" />
+      <File FileName="SGCellBar/Core/ViewModels/IBarViewModel.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="SGCellBar" expanded="True" selected="True">
+          <Node name="SGCellBar" expanded="True">
+            <Node name="Core" expanded="True">
+              <Node name="ViewModels" expanded="True" />
+            </Node>
             <Node name="UI" expanded="True">
               <Node name="Views" expanded="True">
-                <Node name="TestView.cs" expanded="True" />
+                <Node name="Cells" expanded="True">
+                  <Node name="BarCell.cs" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
@@ -22,7 +32,9 @@
         <State expanded="True" selected="True" />
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
+        <State>
+          <Value>&#x10;this.CollectionView</Value>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

@@ -1,5 +1,6 @@
 ﻿using Cirrious.MvvmCross.ViewModels;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace SGCellBar.Core.ViewModels
 {
@@ -32,6 +33,32 @@ namespace SGCellBar.Core.ViewModels
 				_barViews = value; 
 				RaisePropertyChanged(() => Views);
 			}
-		}       
+		}
+
+		/// <summary>
+		/// Gets the next command.
+		/// </summary>
+		public ICommand NextCommand
+		{
+			get { return new MvxCommand(GoToNextView); }
+		}
+
+        /// <summary>
+        /// Gets the previous command.
+        /// </summary>
+        public ICommand PreviousCommand
+        {
+            get { return new MvxCommand(GoToPreviousView); }
+        }
+
+		private void GoToNextView()
+		{
+			RaisePropertyChanged(() => NextCommand);
+		}
+
+        private void GoToPreviousView()
+        {
+            RaisePropertyChanged(() => PreviousCommand);
+        }
     }
 }

@@ -153,8 +153,6 @@
 									<reference key="IBUICollectionView" ref="925731222"/>
 									<int key="IBUIScrollDirection">1</int>
 									<string key="IBUIItemSize">{320, 190}</string>
-									<float key="IBUIMinimumLineSpacing">10</float>
-									<float key="IBUIMinimumInteritemSpacing">10</float>
 								</object>
 								<array key="IBUICells" id="0"/>
 							</object>
@@ -224,6 +222,15 @@
 						<reference key="destination" ref="925731222"/>
 					</object>
 					<int key="connectionID">80</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">HandleButtonRightTouchUpInside:</string>
+						<reference key="source" ref="496496250"/>
+						<reference key="destination" ref="302723463"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">81</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -594,11 +601,6 @@
 						<reference key="parent" ref="302723463"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">71</int>
-						<reference key="object" ref="400288679"/>
-						<reference key="parent" ref="302723463"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">72</int>
 						<reference key="object" ref="925731222"/>
 						<array class="NSMutableArray" key="children">
@@ -645,6 +647,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">79</int>
 						<reference key="object" ref="431355319"/>
+						<reference key="parent" ref="302723463"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">71</int>
+						<reference key="object" ref="400288679"/>
 						<reference key="parent" ref="302723463"/>
 					</object>
 				</array>
@@ -714,13 +721,24 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">80</int>
+			<int key="maxID">82</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">BarCell</string>
 					<string key="superclassName">UITableViewCell</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">HandleButtonRightTouchUpInside:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">HandleButtonRightTouchUpInside:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">HandleButtonRightTouchUpInside:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="ButtonLeft">UIButton</string>
 						<string key="ButtonRight">UIButton</string>
