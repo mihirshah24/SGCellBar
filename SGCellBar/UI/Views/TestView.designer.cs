@@ -17,11 +17,19 @@ namespace SGCellBar.UI.Views
 		[Outlet]
 		MonoTouch.UIKit.UITableView TableView { get; set; }
 
+		[Outlet]
+		MonoTouch.UIKit.UICollectionView VerticalCollectionView { get; set; }
+
 		[Action ("HandleButtonAddBarClicked:")]
 		partial void HandleButtonAddBarClicked (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (VerticalCollectionView != null) {
+				VerticalCollectionView.Dispose ();
+				VerticalCollectionView = null;
+			}
+
 			if (ButtonAddBar != null) {
 				ButtonAddBar.Dispose ();
 				ButtonAddBar = null;

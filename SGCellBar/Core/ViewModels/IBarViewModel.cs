@@ -3,10 +3,10 @@ using System.Windows.Input;
 
 namespace SGCellBar.Core.ViewModels
 {
-	public interface IBarViewModel
+    public interface IBarViewModel : IBarviewModelBase
 	{
-		string Header { get; set;}
-		ObservableCollection<BarCollectionViewModel> Views { get; set;}
+		ICommand AddCommand { get; }
+        ObservableCollection<IBarviewModelBase> Views { get; set; }
 		ICommand NextCommand { get; }
 
 	    /// <summary>
@@ -14,5 +14,10 @@ namespace SGCellBar.Core.ViewModels
 	    /// </summary>
 	    ICommand PreviousCommand { get; }
 	}
+
+    public interface IBarviewModelBase
+    {
+        string Header { get; set; }
+    }
 }
 

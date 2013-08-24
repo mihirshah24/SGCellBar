@@ -11,6 +11,9 @@ namespace SGCellBar.UI.Views.Cells
 	partial class BarCell
 	{
 		[Outlet]
+		MonoTouch.UIKit.UIButton ButtonAdd { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UIButton ButtonLeft { get; set; }
 
 		[Outlet]
@@ -22,11 +25,19 @@ namespace SGCellBar.UI.Views.Cells
 		[Outlet]
 		MonoTouch.UIKit.UILabel UILabelHeader { get; set; }
 
+		[Action ("HandleButtonAddTouchUpInside:")]
+		partial void HandleButtonAddTouchUpInside (MonoTouch.Foundation.NSObject sender);
+
 		[Action ("HandleButtonRightTouchUpInside:")]
 		partial void HandleButtonRightTouchUpInside (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (ButtonAdd != null) {
+				ButtonAdd.Dispose ();
+				ButtonAdd = null;
+			}
+
 			if (ButtonLeft != null) {
 				ButtonLeft.Dispose ();
 				ButtonLeft = null;

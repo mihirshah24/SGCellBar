@@ -1,3 +1,4 @@
+using Cirrious.CrossCore;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Platform;
@@ -25,7 +26,20 @@ namespace SGCellBar
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-            // create a new window instance based on the screen size
+			_window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+			var presenter = new MvxTouchViewPresenter(this, _window);
+			var setup = new Setup(this, presenter);
+			setup.Initialize();
+
+			var startup = Mvx.Resolve<IMvxAppStart>();
+			startup.Start();
+
+			_window.MakeKeyAndVisible();
+
+			return true;
+            /*
+			// create a new window instance based on the screen size
             _window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             // If you have defined a view, add it here:
@@ -34,13 +48,15 @@ namespace SGCellBar
             var setup = new Setup(this, presenter);
             setup.Initialize();
 
-			var simpleStart = new MvxAppStart<BarHolderViewModel>();
-            simpleStart.Start();
+			//var simpleStart = new MvxAppStart<BarHolderViewModel>();
+            //simpleStart.Start();
+			var startup = Mvx.Resolve<IMvxAppStart>();
+			startup.Start();;
 
             // make the window visible
             _window.MakeKeyAndVisible();
 
-            return true;
+            return true;*/
 		}
 	}
 }

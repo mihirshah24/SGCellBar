@@ -1,4 +1,7 @@
-﻿using Cirrious.CrossCore.Plugins;
+﻿using System;
+using System.Collections.Generic;
+using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
@@ -35,5 +38,8 @@ namespace SGCellBar.UI
 
             base.InitializeLastChance();
         }
-    }
+
+
+  }
+    
 }

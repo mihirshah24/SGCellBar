@@ -9,7 +9,11 @@ namespace SGCellBar.Core.ViewModels
     /// </summary>
     public class BarHolderViewModel : MvxViewModel
 	{
-		private ObservableCollection<IBarViewModel> _bars = new ObservableCollection<IBarViewModel>();
+		private ObservableCollection<IBarViewModel> _bars = new ObservableCollection<IBarViewModel> {
+			new BarViewModel { Header = "Default",
+            }
+		};
+
         private int _currentBarIndex;
         private bool _isRightButtonEnabled;
         private bool _isLeftButtonEnabled;

@@ -2,7 +2,7 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace SGCellBar.Core.ViewModels
 {
-	public class BarCollectionViewModel : MvxViewModel
+	public class BarCollectionViewModel : MvxViewModel, IBarviewModelBase
 	{
 		private string _header;
 		public string Header

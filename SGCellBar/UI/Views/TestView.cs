@@ -1,5 +1,5 @@
-using System;
 using System.ComponentModel;
+using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using SGCellBar.Core.ViewModels;
@@ -13,22 +13,29 @@ namespace SGCellBar.UI.Views
     /// <summary>
     /// 
     /// </summary>
-	public partial class TestView : MvxViewController
+	public partial class TestView : MvxCollectionViewController
 	{
+        private readonly bool _isInitialised;
 
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>
-		public new BarHolderViewModel ViewModel
-		{
-			get { return (BarHolderViewModel) base.ViewModel; }
-			set { base.ViewModel = value; }
-		}
+        public new BarHolderViewModel ViewModel
+        {
+            get { return (BarHolderViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
 
 
-		public TestView () : base ("TestView", null)
-		{
-		}
+        public TestView() : base(new UICollectionViewFlowLayout
+            {
+                ItemSize = new SizeF(320, 240),
+                ScrollDirection = UICollectionViewScrollDirection.Vertical
+            })
+        {
+            _isInitialised = true;
+            ViewDidLoad();
+        }
 
 		public override void DidReceiveMemoryWarning ()
 		{
@@ -40,15 +47,30 @@ namespace SGCellBar.UI.Views
 
 		public override void ViewDidLoad ()
 		{
+            if (!_isInitialised)
+                return;
+
 			base.ViewDidLoad ();
 			
 			// Perform any additional setup after loading the view, typically from a nib.
-            var source = new TableSource(TableView);
+            //var source = new TableSource(TableView);
 
-			this.CreateBinding(source).To((BarHolderViewModel vm) => vm.Bars).Apply();
+            //this.CreateBinding(source).To((BarHolderViewModel vm) => vm.Bars).Apply();
 
-            TableView.Source = source;
-            TableView.ReloadData();
+            //TableView.Source = source;
+            //TableView.ReloadData();
+
+            CollectionView.RegisterNibForCell(BarCell.Nib, BarCell.Key);
+            var source = new MvxCollectionViewSource(CollectionView, BarCell.Key);
+            CollectionView.Source = source;
+
+            var set = this.CreateBindingSet<TestView, BarHolderViewModel>();
+            set.Bind(source).To(vm => vm.Bars);
+            set.Apply();
+
+            CollectionView.ReloadData();
+		    VerticalCollectionView = CollectionView;
+
 		    ViewModel.PropertyChanged += HandleViewModelPropertyChanged;
 		}
 
@@ -61,59 +83,6 @@ namespace SGCellBar.UI.Views
 	        }
 	    }
 
-
-        /// <summary>
-        /// Data Source for the Table View.
-        /// </summary>
-	    public class TableSource : MvxTableViewSource
-        {
-            /// <summary>
-            /// Initializes a new instance of the <see cref="TableSource"/> class.
-            /// </summary>
-            /// <param name="tableView">The table view.</param>
-            public TableSource(UITableView tableView) : base(tableView)
-            {
-                UseAnimations = true;
-                AddAnimation = UITableViewRowAnimation.Top;
-                RemoveAnimation = UITableViewRowAnimation.Middle;
-
-                tableView.RegisterNibForCellReuse(BarCell.Nib, BarCell.Identifier);
-
-            }
-
-            /// <summary>
-            /// Gets the height for row.
-            /// </summary>
-            /// <param name="tableView">The table view.</param>
-            /// <param name="indexPath">The index path.</param>
-            /// <returns></returns>
-            public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
-            {
-                return 240.0f;
-            }
-
-            /// <summary>
-            /// Gets the or create cell for.
-            /// </summary>
-            /// <param name="tableView">The table view.</param>
-            /// <param name="indexPath">The index path.</param>
-            /// <param name="item">The item.</param>
-            /// <returns></returns>
-            protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
-            {                
-                UITableViewCell cell;
-                try
-                {
-                    cell = tableView.DequeueReusableCell(BarCell.Identifier, indexPath);
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-
-                return cell;
-            }
-        }
 
         // Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in TestView.designer.cs file by its name. That's how Xamarin is linking the event on the button.
         partial void HandleButtonAddBarClicked(NSObject sender)

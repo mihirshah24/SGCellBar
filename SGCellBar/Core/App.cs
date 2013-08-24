@@ -14,6 +14,11 @@ namespace SGCellBar.Core
             RegisterServices();
         }
 
+		public override void Initialize()
+		{
+			RegisterAppStart<ViewModels.BarHolderViewModel>();
+		}       
+
         private void RegisterServices()
         {
             

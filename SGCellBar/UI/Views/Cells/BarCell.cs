@@ -15,10 +15,10 @@ namespace SGCellBar.UI.Views.Cells
     /// Corresponds to each table cell that holds collectionview. Inherits <see cref="MvxTableViewCell"/>
     /// </summary>
 	[Register("BarCell")]
-	public partial class BarCell : MvxTableViewCell
+    public partial class BarCell : MvxCollectionViewCell
 	{
 		public static readonly UINib Nib = UINib.FromName ("BarCell", NSBundle.MainBundle);
-		public static readonly NSString Identifier = new NSString("BarCell");
+		public static readonly NSString Key = new NSString("BarCell");
         
 
         /// <summary>
@@ -30,17 +30,18 @@ namespace SGCellBar.UI.Views.Cells
             this.DelayBind(() =>
             {
                 var set = this.CreateBindingSet<BarCell, BarViewModel>();
-                set.Bind(UILabelHeader).To(p => p.Header);
+                set.Bind(ButtonAdd).To(p => p.AddCommand);
 				set.Bind(ButtonRight).To(p => p.NextCommand);
                 set.Bind(ButtonLeft).To(p => p.PreviousCommand);
 				set.Apply();
             });
+
         }
 
         /// <summary>
         /// Gets or sets the data context.
         /// </summary>
-        public override object DataContext
+        public new object DataContext
         {
             get
             {
@@ -90,8 +91,8 @@ namespace SGCellBar.UI.Views.Cells
         {
             base.AwakeFromNib();
 
-            CollectionView.RegisterNibForCell(BarCollectionCell.Nib, BarCollectionCell.Key);
-            var source = new MvxCollectionViewSource(CollectionView, BarCollectionCell.Key);
+			CollectionView.RegisterNibForCell(BarCell.Nib, BarCell.Key);
+			var source = new MvxCollectionViewSource(CollectionView, BarCell.Key);
             CollectionView.Source = source;
 
             var set = this.CreateBindingSet<BarCell, BarViewModel>();
@@ -99,7 +100,7 @@ namespace SGCellBar.UI.Views.Cells
             set.Apply();
 
             // Disable the scrolling since we want to control it via Previous and Next button clicks.
-            CollectionView.ScrollEnabled = false;
+            //CollectionView.ScrollEnabled = false;
             // With Paging enabled, each view will snap to the edges of the frame as they scroll.
             CollectionView.PagingEnabled = true;
             CollectionView.ReloadData();
@@ -120,6 +121,13 @@ namespace SGCellBar.UI.Views.Cells
             }
         }
         
+		// Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.
+		partial void HandleButtonAddTouchUpInside (NSObject sender)
+		{
+			//if (ViewModel == null) return;
+			//ViewModel.AddCommand.Execute(null);
+		}
+
         // Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.
 		partial void HandleButtonRightTouchUpInside (NSObject sender)
 		{

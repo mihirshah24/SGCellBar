@@ -130,10 +130,6 @@
     <Compile Include="UI\Setup.cs" />
     <Compile Include="UI\Views\Cells\BarCell.cs" />
     <Compile Include="UI\Views\Cells\BarCell.designer.cs" />
-    <Compile Include="UI\Views\TestView.cs" />
-    <Compile Include="UI\Views\TestView.designer.cs">
-      <DependentUpon>TestView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Core\ViewModels\BarHolderViewModel.cs" />
     <Compile Include="UI\Views\Cells\BarCollectionCell.cs" />
     <Compile Include="UI\Views\Cells\BarCollectionCell.designer.cs">
@@ -141,11 +137,11 @@
     </Compile>
     <Compile Include="Core\ViewModels\BarCollectionViewModel.cs" />
     <Compile Include="Core\ViewModels\IBarViewModel.cs" />
+    <Compile Include="UI\Views\FirstView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <InterfaceDefinition Include="UI\Views\Cells\BarCell.xib" />
-    <InterfaceDefinition Include="UI\Views\TestView.xib" />
     <InterfaceDefinition Include="UI\Views\Cells\BarCollectionCell.xib" />
   </ItemGroup>
 </Project>
