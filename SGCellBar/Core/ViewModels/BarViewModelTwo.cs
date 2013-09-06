@@ -1,13 +1,17 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
+using SGCellBar.Core.Interfaces;
 
 namespace SGCellBar.Core.ViewModels
 {
-    public class BarViewModelTwo : MvxViewModel, IBarViewModel
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BarViewModelTwo : MvxViewModel, IBarViewModelTwo
     {
         private int i;
-        private ObservableCollection<IBarviewModelBase> _barViews = new ObservableCollection<IBarviewModelBase>();
+        private ObservableCollection<IBarViewModelBase> _barViews = new ObservableCollection<IBarViewModelBase>();
         private string _header;
 
         /// <summary>
@@ -24,9 +28,14 @@ namespace SGCellBar.Core.ViewModels
         }
 
         /// <summary>
+        /// Gets or sets the view.
+        /// </summary>
+        public IBarCellView View { get; set; }
+
+        /// <summary>
         /// Gets or sets the views.
         /// </summary>
-        public ObservableCollection<IBarviewModelBase> Views
+        public ObservableCollection<IBarViewModelBase> Views
         {
             get { return _barViews; }
             set
@@ -103,5 +112,7 @@ namespace SGCellBar.Core.ViewModels
         {
             RaisePropertyChanged(() => PreviousCommand);
         }
+
+        
     }
 }

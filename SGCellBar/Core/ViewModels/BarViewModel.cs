@@ -1,13 +1,14 @@
 ﻿using Cirrious.MvvmCross.ViewModels;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using SGCellBar.Core.Interfaces;
 
 namespace SGCellBar.Core.ViewModels
 {
 	public class BarViewModel : MvxViewModel, IBarViewModel
 	{
 	    private int i = 0;
-        private ObservableCollection<IBarviewModelBase> _barViews = new ObservableCollection<IBarviewModelBase>
+        private ObservableCollection<IBarViewModelBase> _barViews = new ObservableCollection<IBarViewModelBase>
 		                                                                     {																			     
 		                                                                         //new BarCollectionViewModel { Header = "View 1" },
 																				 //new BarCollectionViewModel { Header = "View 2" },
@@ -27,6 +28,11 @@ namespace SGCellBar.Core.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets the view.
+        /// </summary>
+        public IBarCellView View { get; set; }
+
 	    public ICommand AddCommand
 	    {
             get { return new MvxCommand(AddBar); }
@@ -37,7 +43,7 @@ namespace SGCellBar.Core.ViewModels
 	    /// <summary>
         /// Gets or sets the views.
         /// </summary>
-        public ObservableCollection<IBarviewModelBase> Views
+        public ObservableCollection<IBarViewModelBase> Views
 		{
 			get { return _barViews; }
 			set
@@ -75,39 +81,45 @@ namespace SGCellBar.Core.ViewModels
 
         private void AddBar()
         {
-            string headerText = "Default";
+            //string headerText = "Default";
 
-            IBarViewModel barViewModel = null;
-            switch (i)
-            {
-                case 0:
-                    headerText = "Home";
-                    barViewModel = new BarViewModel { Header = headerText };
-                    break;
-                case 1:
-                    headerText = "Inbox";
-                    barViewModel = new BarViewModelTwo { Header = headerText };
-                    break;
-                case 2:
-                    headerText = "Itemized Bill";
-                    barViewModel = new BarViewModel { Header = headerText };
-                    break;
-                case 3:
-                    headerText = "Description";
-                    barViewModel = new BarViewModelTwo { Header = headerText };
-                    break;
-            }
+            //IBarViewModel barViewModel = null;
+            //switch (i)
+            //{
+            //    case 0:
+            //        headerText = "Home";
+            //        barViewModel = new BarViewModel { Header = headerText };
+            //        //barViewModel = App.SGFactory.Create<IBarViewModel, IBarCellView>();
+            //        //barViewModel.Header = headerText;
+            //        break;
+            //    case 1:
+            //        headerText = "Inbox";
+            //        //barViewModel = Core.App.SGFactory.Create<IBarViewModelTwo, IBarCellView>();
+            //        //barViewModel.Header = headerText;
+            //        //barViewModel = new BarViewModelTwo { Header = headerText };
+            //        break;
+            //    case 2:
+            //        headerText = "Itemized Bill";
+            //        barViewModel = new BarViewModel { Header = headerText };
+            //        break;
+            //    case 3:
+            //        headerText = "Description";
+            //        barViewModel = new BarViewModelTwo { Header = headerText };
+            //        break;
+            //}
 
-            if (barViewModel != null)
-            {
-                barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 1" });
-                //barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 2" });
-                //barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 3" });
-                //barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 1" });
-                Views.Add(barViewModel);
-            }
+            //if (barViewModel != null)
+            //{
+            //    barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 1" });
+            //    //barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 2" });
+            //    //barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 3" });
+            //    //barViewModel.Views.Add(new BarCollectionViewModel { Header = "View 1" });
+            //    Views.Add(barViewModel);
+            //}
 
-            ++i;
+            //++i;
         }
-    }
+
+	    
+	}
 }

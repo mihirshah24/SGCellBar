@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views;
@@ -6,6 +7,11 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using SGCellBar.Core.ViewModels;
 using SGCellBar.UI.Views.Cells;
+using Cirrious.CrossCore;
+using Cirrious.MvvmCross.Touch.Views;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
+using Cirrious.MvvmCross.ViewModels;
+using MonoTouch.UIKit;
 
 namespace SGCellBar.UI.Views
 {
@@ -16,7 +22,7 @@ namespace SGCellBar.UI.Views
     public class FirstView : MvxCollectionViewController
     {
         private readonly bool _isInitialised;
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="FirstView"/> class.
         /// </summary>
@@ -55,6 +61,7 @@ namespace SGCellBar.UI.Views
             set.Apply();
 
             CollectionView.ReloadData();
+
         }
     }
 }

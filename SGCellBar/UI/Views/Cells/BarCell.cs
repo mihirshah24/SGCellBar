@@ -1,12 +1,16 @@
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
+using SGCellBar.Core.Interfaces;
 using SGCellBar.Core.ViewModels;
 using System.Linq;
 using Cirrious.MvvmCross.ViewModels;
+using Cirrious.CrossCore;
+using SGCellBar.Core;
 
 namespace SGCellBar.UI.Views.Cells
 {
@@ -15,7 +19,7 @@ namespace SGCellBar.UI.Views.Cells
     /// Corresponds to each table cell that holds collectionview. Inherits <see cref="MvxTableViewCell"/>
     /// </summary>
 	[Register("BarCell")]
-    public partial class BarCell : MvxCollectionViewCell
+    public partial class BarCell : MvxCollectionViewCell, IBarCellView
 	{
 		public static readonly UINib Nib = UINib.FromName ("BarCell", NSBundle.MainBundle);
 		public static readonly NSString Key = new NSString("BarCell");
@@ -60,7 +64,10 @@ namespace SGCellBar.UI.Views.Cells
             }
         }
 
-        private IBarViewModel ViewModel { get; set; }
+        /// <summary>
+        /// Gets or sets the view model.
+        /// </summary>
+        public IBarViewModel ViewModel { get; set; }
 
         private int SubViewCount
         {
@@ -120,12 +127,57 @@ namespace SGCellBar.UI.Views.Cells
                 return;
             }
         }
-        
+
+        private int i = 0;
 		// Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.
 		partial void HandleButtonAddTouchUpInside (NSObject sender)
 		{
 			//if (ViewModel == null) return;
 			//ViewModel.AddCommand.Execute(null);
+
+		    switch (i)
+		    {
+                case 0:
+                    var subViewModelOne = App.SGFactory.Create<ISubViewModelOne, ISubViewOne>();
+                    if (subViewModelOne != null)
+                    {
+                        var subViewOne = subViewModelOne.View as SubviewOne;
+                        if (subViewOne != null)
+                        {
+                            subViewOne.Hidden = false;
+                            subViewOne.Frame = new RectangleF(0, 0, 320, 200);
+                            CollectionView.AddSubview(subViewOne);
+                        }
+                    }
+
+                    //var label = new UILabel();
+                    //label.Text = "Test Label";
+                    //label.Hidden = false;
+                    //label.Frame = new RectangleF(0, 0, 320, 200);
+                    //CollectionView.AddSubview(label);
+                    
+		            break;
+
+                case 1:
+                    var subViewModelTwo = App.SGFactory.Create<ISubViewModelTwo, ISubViewTwo>();
+                    if (subViewModelTwo != null)
+                    {
+                        var subViewOne = subViewModelTwo.View as SubviewTwo;
+                        if (subViewOne != null)
+                        {
+                            subViewOne.Hidden = false;
+                            subViewOne.Frame = new RectangleF(0, 0, 320, 200);
+                            CollectionView.AddSubview(subViewOne);
+                        }
+                    }
+		            break;
+
+                case 2:
+
+		            break;
+		    }
+
+		    ++i;
 		}
 
         // Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.

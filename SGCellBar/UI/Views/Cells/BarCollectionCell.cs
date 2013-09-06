@@ -3,6 +3,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using SGCellBar.Core.Interfaces;
 using SGCellBar.Core.ViewModels;
 
 namespace SGCellBar.UI.Views.Cells
@@ -10,7 +11,7 @@ namespace SGCellBar.UI.Views.Cells
     /// <summary>
     /// Corresponds to each cell of collection view. Inherits <see cref="MvxCollectionViewCell"/>
     /// </summary>
-	public partial class BarCollectionCell : MvxCollectionViewCell
+    public partial class BarCollectionCell : MvxCollectionViewCell, IBarCollectionCellView
 	{
 		public static readonly UINib Nib = UINib.FromName ("BarCollectionCell", NSBundle.MainBundle);
 		public static readonly NSString Key = new NSString ("BarCollectionCell");
@@ -29,6 +30,11 @@ namespace SGCellBar.UI.Views.Cells
 		}
 
         /// <summary>
+        /// Gets or sets the view model.
+        /// </summary>
+        public IBarCollectionViewModel ViewModel { get; set; }
+
+        /// <summary>
         /// Creates this instance.
         /// </summary>
         /// <returns><see cref="BarCollectionCell"/></returns>
@@ -36,6 +42,8 @@ namespace SGCellBar.UI.Views.Cells
 		{
 			return (BarCollectionCell)Nib.Instantiate (null, null) [0];
 		}
+
+        
 	}
 }
 

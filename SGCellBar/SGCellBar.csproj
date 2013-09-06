@@ -113,7 +113,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\Interfaces\" />
     <Folder Include="Core\Models\" />
     <Folder Include="Core\Services\" />
     <Folder Include="Resources\" />
@@ -123,10 +122,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\App.cs" />
+    <Compile Include="Core\Interfaces\IBarCellView.cs" />
+    <Compile Include="Core\Interfaces\IBarCollectionCellView.cs" />
+    <Compile Include="Core\Interfaces\IBarCollectionViewModel.cs" />
+    <Compile Include="Core\Interfaces\ISGFactory.cs" />
+    <Compile Include="Core\Interfaces\ISubViewModelOne.cs" />
+    <Compile Include="Core\Interfaces\ISubViewModelTwo.cs" />
+    <Compile Include="Core\Interfaces\ISubViewOne.cs" />
+    <Compile Include="Core\Interfaces\ISubViewTwo.cs" />
+    <Compile Include="Core\Interfaces\IView.cs" />
+    <Compile Include="Core\Interfaces\IViewHelper.cs" />
+    <Compile Include="Core\Interfaces\IViewModel.cs" />
     <Compile Include="Core\ViewModels\BarViewModel.cs" />
     <Compile Include="Core\ViewModels\BarViewModelTwo.cs" />
+    <Compile Include="Core\ViewModels\SubViewModelOne.cs" />
+    <Compile Include="Core\ViewModels\SubViewModelTwo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="UI\Common\SGFactory.cs" />
+    <Compile Include="UI\Common\ViewHelper.cs" />
     <Compile Include="UI\Setup.cs" />
     <Compile Include="UI\Views\Cells\BarCell.cs" />
     <Compile Include="UI\Views\Cells\BarCell.designer.cs" />
@@ -136,12 +150,22 @@
       <DependentUpon>BarCollectionCell.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\ViewModels\BarCollectionViewModel.cs" />
-    <Compile Include="Core\ViewModels\IBarViewModel.cs" />
+    <Compile Include="Core\Interfaces\IBarViewModel.cs" />
     <Compile Include="UI\Views\FirstView.cs" />
+    <Compile Include="UI\Views\SubviewOne.cs" />
+    <Compile Include="UI\Views\SubviewOne.designer.cs">
+      <DependentUpon>SubviewOne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\SubviewTwo.cs" />
+    <Compile Include="UI\Views\SubviewTwo.designer.cs">
+      <DependentUpon>SubviewTwo.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <InterfaceDefinition Include="UI\Views\Cells\BarCell.xib" />
     <InterfaceDefinition Include="UI\Views\Cells\BarCollectionCell.xib" />
+    <InterfaceDefinition Include="UI\Views\SubviewOne.xib" />
+    <InterfaceDefinition Include="UI\Views\SubviewTwo.xib" />
   </ItemGroup>
 </Project>

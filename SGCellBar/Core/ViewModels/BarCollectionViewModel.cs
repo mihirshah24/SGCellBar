@@ -1,8 +1,12 @@
 using Cirrious.MvvmCross.ViewModels;
+using SGCellBar.Core.Interfaces;
 
 namespace SGCellBar.Core.ViewModels
 {
-	public class BarCollectionViewModel : MvxViewModel, IBarviewModelBase
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BarCollectionViewModel : MvxViewModel, IBarCollectionViewModel
 	{
 		private string _header;
 		public string Header
@@ -14,6 +18,11 @@ namespace SGCellBar.Core.ViewModels
 				RaisePropertyChanged(() => Header);
 			}
 		}
+
+        /// <summary>
+        /// Gets or sets the view.
+        /// </summary>
+        public IBarCollectionCellView View { get; set; }
 	}
 }
 

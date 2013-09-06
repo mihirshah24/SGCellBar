@@ -1,24 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.ViewModels;
+﻿using Cirrious.MvvmCross.ViewModels;
+using SGCellBar.Core.Interfaces;
 
 namespace SGCellBar.Core
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class App : MvxApplication
     {
+
+        /// <summary>
+        /// Gets or sets the <see cref="ISGFactory"/>
+        /// </summary>
+        public static ISGFactory SGFactory { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="App"/> class.
+        /// </summary>
         public App()
         {
             RegisterServices();
         }
 
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
 		public override void Initialize()
 		{
 			RegisterAppStart<ViewModels.BarHolderViewModel>();
-		}       
+		}
 
+        /// <summary>
+        /// Registers the services.
+        /// </summary>
         private void RegisterServices()
         {
             
