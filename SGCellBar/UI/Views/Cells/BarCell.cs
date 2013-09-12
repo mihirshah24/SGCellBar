@@ -98,19 +98,20 @@ namespace SGCellBar.UI.Views.Cells
         {
             base.AwakeFromNib();
 
-			CollectionView.RegisterNibForCell(BarCell.Nib, BarCell.Key);
-			var source = new MvxCollectionViewSource(CollectionView, BarCell.Key);
-            CollectionView.Source = source;
+            //CollectionView.RegisterNibForCell(BarCell.Nib, BarCell.Key);
+            //var source = new MvxCollectionViewSource(CollectionView, BarCell.Key);
+            //CollectionView.Source = source;
 
-            var set = this.CreateBindingSet<BarCell, BarViewModel>();
-            set.Bind(source).To(vm => vm.Views);
-            set.Apply();
-
+            //var set = this.CreateBindingSet<BarCell, BarViewModel>();
+            //set.Bind(source).To(vm => vm.Views);
+            //set.Apply();
+            
             // Disable the scrolling since we want to control it via Previous and Next button clicks.
             //CollectionView.ScrollEnabled = false;
             // With Paging enabled, each view will snap to the edges of the frame as they scroll.
             CollectionView.PagingEnabled = true;
             CollectionView.ReloadData();
+
         }
 
         private void HandleBarViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -138,23 +139,49 @@ namespace SGCellBar.UI.Views.Cells
 		    switch (i)
 		    {
                 case 0:
-                    var subViewModelOne = App.SGFactory.Create<ISubViewModelOne, ISubViewOne>();
-                    if (subViewModelOne != null)
-                    {
-                        var subViewOne = subViewModelOne.View as SubviewOne;
-                        if (subViewOne != null)
-                        {
-                            subViewOne.Hidden = false;
-                            subViewOne.Frame = new RectangleF(0, 0, 320, 200);
-                            CollectionView.AddSubview(subViewOne);
-                        }
-                    }
+                    //var subViewModelOne = App.SGFactory.Create<ISubViewModelOne, ISubViewOne>();
+                    //if (subViewModelOne != null)
+                    //{
+                    //    var subViewOne = subViewModelOne.View as UIView;
+                    //    if (subViewOne != null)
+                    //    {
+                    //        subViewOne.ClipsToBounds = true;
+                    //        subViewOne.Hidden = false;
+                    //        subViewOne.Frame = new RectangleF(20, 20, 320, 200);
+                    //        CollectionView.AddSubview(subViewOne);
+                    //        //ContentView.AddSubview(subViewOne);
+                    //        BringSubviewToFront(subViewOne);
+                    //    }
+                    //}
 
-                    //var label = new UILabel();
-                    //label.Text = "Test Label";
-                    //label.Hidden = false;
-                    //label.Frame = new RectangleF(0, 0, 320, 200);
-                    //CollectionView.AddSubview(label);
+                    // This code works
+                    var label = new UILabel();
+                    label.Text = "Test Label";
+		            label.ClipsToBounds = true;
+                    label.Hidden = false;
+                    label.Frame = new RectangleF(0, 0, 320, 200);
+                    CollectionView.AddSubview(label);
+                    CollectionView.BringSubviewToFront(label);
+
+
+                    //// This also works. SubviewThree is inheriting UIViewController
+                    //var mvxViewController = new SubviewThree();
+                    //var uiView = mvxViewController.View;
+                    //uiView.ClipsToBounds = true;
+                    //uiView.Hidden = false;
+                    //uiView.Frame = new RectangleF(0, 0, 320, 200);
+                    //CollectionView.AddSubview(uiView);
+                    //CollectionView.BringSubviewToFront(uiView);
+
+
+                    //// This doesn't work. SubviewFour is inheriting MvxViewController
+                    //var mvxViewController = new SubviewFour();
+                    //var uiView = mvxViewController.View;
+                    //uiView.ClipsToBounds = true;
+                    //uiView.Hidden = false;
+                    //uiView.Frame = new RectangleF(0, 0, 320, 200);
+                    //CollectionView.AddSubview(uiView);
+                    //CollectionView.BringSubviewToFront(uiView);
                     
 		            break;
 
@@ -183,7 +210,7 @@ namespace SGCellBar.UI.Views.Cells
         // Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.
 		partial void HandleButtonRightTouchUpInside (NSObject sender)
 		{
-			//GoToNextCollectionView();
+			GoToNextCollectionView();
 		}
 
         private void GoToNextCollectionView()

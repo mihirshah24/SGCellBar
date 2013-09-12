@@ -160,6 +160,14 @@
     <Compile Include="UI\Views\SubviewTwo.designer.cs">
       <DependentUpon>SubviewTwo.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\SubviewThree.cs" />
+    <Compile Include="UI\Views\SubviewThree.designer.cs">
+      <DependentUpon>SubviewThree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\SubviewFour.cs" />
+    <Compile Include="UI\Views\SubviewFour.designer.cs">
+      <DependentUpon>SubviewFour.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
@@ -167,5 +175,7 @@
     <InterfaceDefinition Include="UI\Views\Cells\BarCollectionCell.xib" />
     <InterfaceDefinition Include="UI\Views\SubviewOne.xib" />
     <InterfaceDefinition Include="UI\Views\SubviewTwo.xib" />
+    <InterfaceDefinition Include="UI\Views\SubviewThree.xib" />
+    <InterfaceDefinition Include="UI\Views\SubviewFour.xib" />
   </ItemGroup>
 </Project>

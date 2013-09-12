@@ -1,36 +1,35 @@
-using Cirrious.MvvmCross.Binding.Touch.Views;
-using SGCellBar.Core.Interfaces;
+using Cirrious.MvvmCross.Touch.Views;
 
 namespace SGCellBar.UI.Views
 {
     
-    public partial class SubviewOne : MvxView, ISubViewOne
+    public partial class SubviewOne : MvxViewController
 	{
 
-        /// <summary>
-        /// Gets or sets the view model.
-        /// </summary>
-        public ISubViewModelOne ViewModel { get; set; }
+        ///// <summary>
+        ///// Gets or sets the view model.
+        ///// </summary>
+        //public new ISubViewModelOne ViewModel { get; set; }
 
 
-        //public SubviewOne () : base ("SubviewOne", null)
-        //{
-        //}
+        public SubviewOne() : base("SubviewOne", null)
+        {
+        }
 
-        //public override void DidReceiveMemoryWarning ()
-        //{
-        //    // Releases the view if it doesn't have a superview.
-        //    base.DidReceiveMemoryWarning ();
-			
-        //    // Release any cached data, images, etc that aren't in use.
-        //}
+        public override void DidReceiveMemoryWarning()
+        {
+            // Releases the view if it doesn't have a superview.
+            base.DidReceiveMemoryWarning();
 
-        //public override void ViewDidLoad ()
-        //{
-        //    base.ViewDidLoad ();
-			
-        //    // Perform any additional setup after loading the view, typically from a nib.
-        //}
+            // Release any cached data, images, etc that aren't in use.
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            // Perform any additional setup after loading the view, typically from a nib.
+        }
 
         //public class TableViewSource : MvxTableViewSource
         //{
