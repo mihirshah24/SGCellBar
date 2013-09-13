@@ -6,6 +6,7 @@ using Cirrious.MvvmCross.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using SGCellBar.Core.ViewModels;
+using SGCellBar.UI.Common;
 using SGCellBar.UI.Views.Cells;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Touch.Views;
@@ -36,6 +37,7 @@ namespace SGCellBar.UI.Views
             ViewDidLoad();
         }
 
+
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>
@@ -61,6 +63,8 @@ namespace SGCellBar.UI.Views
             set.Apply();
 
             CollectionView.ReloadData();
+
+            SGFactory.Request = this.Request;
 
         }
     }

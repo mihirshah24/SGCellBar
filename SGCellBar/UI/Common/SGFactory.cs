@@ -5,6 +5,7 @@ using SGCellBar.Core.Interfaces;
 using SGCellBar.Core.ViewModels;
 using SGCellBar.UI.Views;
 using SGCellBar.UI.Views.Cells;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace SGCellBar.UI.Common
 {
@@ -20,11 +21,14 @@ namespace SGCellBar.UI.Common
             {typeof(IBarViewModel), typeof(BarViewModel)},
             {typeof(IBarCellView), typeof(BarCell)},
             {typeof(ISubViewModelOne), typeof(SubViewModelOne)},
-            {typeof(ISubViewOne), typeof(SubviewOne)},
+            {typeof(ISubViewOne), typeof(SubviewFour)},
             {typeof(ISubViewModelTwo), typeof(SubViewModelTwo)},
             {typeof(ISubViewTwo), typeof(SubviewTwo)},
 
         };
+
+
+        public static MvxViewModelRequest Request { get; set; }
 
         /// <summary>
         /// Initializes the <see cref="SGFactory"/> class.

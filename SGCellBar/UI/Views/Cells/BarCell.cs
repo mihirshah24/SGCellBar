@@ -11,6 +11,8 @@ using System.Linq;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.CrossCore;
 using SGCellBar.Core;
+using Cirrious.MvvmCross.Touch.Views;
+using SGCellBar.UI.Common;
 
 namespace SGCellBar.UI.Views.Cells
 {
@@ -39,7 +41,7 @@ namespace SGCellBar.UI.Views.Cells
                 set.Bind(ButtonLeft).To(p => p.PreviousCommand);
 				set.Apply();
             });
-
+            
         }
 
         /// <summary>
@@ -139,64 +141,37 @@ namespace SGCellBar.UI.Views.Cells
 		    switch (i)
 		    {
                 case 0:
-                    //var subViewModelOne = App.SGFactory.Create<ISubViewModelOne, ISubViewOne>();
-                    //if (subViewModelOne != null)
-                    //{
-                    //    var subViewOne = subViewModelOne.View as UIView;
-                    //    if (subViewOne != null)
-                    //    {
-                    //        subViewOne.ClipsToBounds = true;
-                    //        subViewOne.Hidden = false;
-                    //        subViewOne.Frame = new RectangleF(20, 20, 320, 200);
-                    //        CollectionView.AddSubview(subViewOne);
-                    //        //ContentView.AddSubview(subViewOne);
-                    //        BringSubviewToFront(subViewOne);
-                    //    }
-                    //}
-
-                    // This code works
-                    var label = new UILabel();
-                    label.Text = "Test Label";
-		            label.ClipsToBounds = true;
-                    label.Hidden = false;
-                    label.Frame = new RectangleF(0, 0, 320, 200);
-                    CollectionView.AddSubview(label);
-                    CollectionView.BringSubviewToFront(label);
-
-
-                    //// This also works. SubviewThree is inheriting UIViewController
-                    //var mvxViewController = new SubviewThree();
-                    //var uiView = mvxViewController.View;
-                    //uiView.ClipsToBounds = true;
-                    //uiView.Hidden = false;
-                    //uiView.Frame = new RectangleF(0, 0, 320, 200);
-                    //CollectionView.AddSubview(uiView);
-                    //CollectionView.BringSubviewToFront(uiView);
-
-
-                    //// This doesn't work. SubviewFour is inheriting MvxViewController
-                    //var mvxViewController = new SubviewFour();
-                    //var uiView = mvxViewController.View;
-                    //uiView.ClipsToBounds = true;
-                    //uiView.Hidden = false;
-                    //uiView.Frame = new RectangleF(0, 0, 320, 200);
-                    //CollectionView.AddSubview(uiView);
-                    //CollectionView.BringSubviewToFront(uiView);
-                    
+                    var subViewModelOne = App.SGFactory.Create<ISubViewModelOne, ISubViewOne>();
+                    if (subViewModelOne != null)
+                    {
+                        var subViewOne = subViewModelOne.View as MvxViewController;
+                        if (subViewOne != null)
+                        {
+                            // TODO: Is there other way to fetch MvxViewModelRequest object?
+                            subViewOne.Request = SGFactory.Request;
+                            subViewOne.View.ClipsToBounds = true;
+						    subViewOne.View.Hidden = false;
+						    subViewOne.View.Frame = new RectangleF(0, 0, 320, 200);
+                            CollectionView.AddSubview(subViewOne.View);
+                            BringSubviewToFront(subViewOne.View);
+                        }
+                    }
 		            break;
 
                 case 1:
-                    var subViewModelTwo = App.SGFactory.Create<ISubViewModelTwo, ISubViewTwo>();
-                    if (subViewModelTwo != null)
-                    {
-                        var subViewOne = subViewModelTwo.View as SubviewTwo;
-                        if (subViewOne != null)
-                        {
-                            subViewOne.Hidden = false;
-                            subViewOne.Frame = new RectangleF(0, 0, 320, 200);
-                            CollectionView.AddSubview(subViewOne);
-                        }
-                    }
+                        //var subViewModelTwo = App.SGFactory.Create<ISubViewModelTwo, ISubViewTwo>();
+                        //if (subViewModelTwo != null)
+                        //{
+                        //    var subViewTwo = subViewModelTwo.View as MvxViewController;
+                        //    if (subViewTwo != null)
+                        //    {
+                        //        subViewTwo.Request = SGFactory.Request;
+                        //        subViewTwo.View.Hidden = false;
+                        //        subViewTwo.View.Frame = new RectangleF(0, 0, 320, 200);
+                        //        CollectionView.AddSubview(subViewTwo.View);
+                        //        BringSubviewToFront(subViewTwo.View);
+                        //    }
+                        //}
 		            break;
 
                 case 2:
@@ -210,7 +185,21 @@ namespace SGCellBar.UI.Views.Cells
         // Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.
 		partial void HandleButtonRightTouchUpInside (NSObject sender)
 		{
-			GoToNextCollectionView();
+            var subViewModelTwo = App.SGFactory.Create<ISubViewModelTwo, ISubViewTwo>();
+            if (subViewModelTwo != null)
+            {
+                var subViewTwo = subViewModelTwo.View as MvxViewController;
+                if (subViewTwo != null)
+                {
+                    subViewTwo.Request = SGFactory.Request;
+                    subViewTwo.View.Hidden = false;
+                    subViewTwo.View.Frame = new RectangleF(0, 0, 320, 200);
+                    CollectionView.AddSubview(subViewTwo.View);
+                    BringSubviewToFront(subViewTwo.View);
+                }
+            }
+
+			//GoToNextCollectionView();
 		}
 
         private void GoToNextCollectionView()

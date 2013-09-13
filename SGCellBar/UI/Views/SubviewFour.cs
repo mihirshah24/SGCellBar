@@ -3,7 +3,7 @@ using SGCellBar.Core.Interfaces;
 
 namespace SGCellBar.UI.Views
 {
-	public partial class SubviewFour : MvxViewController
+    public partial class SubviewFour : MvxViewController, ISubViewOne
 	{
 		public SubviewFour () : base ("SubviewFour", null)
 		{
