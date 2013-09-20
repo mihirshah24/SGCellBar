@@ -1,4 +1,8 @@
-﻿namespace SGCellBar.Core.Interfaces
+﻿using Cirrious.MvvmCross.ViewModels;
+using SGCellBar.Core.Interfaces.Views;
+using SGCellBar.Core.Interfaces.Views.Common;
+
+namespace SGCellBar.Core.Interfaces.ViewModels.Common
 {
     /// <summary>
     /// 
@@ -17,6 +21,6 @@
         /// </exception>
         TVM Create<TVM, TV>()
             where TV : class, IView<TVM>
-            where TVM : class, IViewModel<TV>;
+				where TVM : class, IViewModel<TV>, IMvxViewModel;
     }
 }

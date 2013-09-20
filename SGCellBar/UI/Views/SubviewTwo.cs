@@ -1,6 +1,7 @@
-using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views;
-using SGCellBar.Core.Interfaces;
+using SGCellBar.Core.Interfaces.ViewModels;
+using SGCellBar.Core.Interfaces.Views;
+using SGCellBar.Core.Interfaces.Views.Common;
 
 namespace SGCellBar.UI.Views
 {
@@ -19,19 +20,9 @@ namespace SGCellBar.UI.Views
         {
         }
 
-        public override void DidReceiveMemoryWarning()
+        public void AddSubView(IView subView)
         {
-            // Releases the view if it doesn't have a superview.
-            base.DidReceiveMemoryWarning();
-
-            // Release any cached data, images, etc that aren't in use.
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            // Perform any additional setup after loading the view, typically from a nib.
+            // Not Supported
         }
         
 	}

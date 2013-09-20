@@ -1,18 +1,17 @@
-﻿using Cirrious.MvvmCross.ViewModels;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using SGCellBar.Core.Interfaces;
+using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
+using SGCellBar.Core.Interfaces.ViewModels;
+using SGCellBar.Core.Interfaces.ViewModels.Common;
+using SGCellBar.Core.Interfaces.Views;
 
-namespace SGCellBar.Core.ViewModels
+namespace SGCellBar.Core.Impl.ViewModels
 {
 	public class BarViewModel : MvxViewModel, IBarViewModel
 	{
-	    private int i = 0;
-        private ObservableCollection<IBarViewModelBase> _barViews = new ObservableCollection<IBarViewModelBase>
-		                                                                     {																			     
-		                                                                         //new BarCollectionViewModel { Header = "View 1" },
-																				 //new BarCollectionViewModel { Header = "View 2" },
-		                                                                     };
+        private ObservableCollection<IViewModel> _barViews = 
+            new ObservableCollection<IViewModel>();
         private string _header;
 
         /// <summary>
@@ -28,22 +27,29 @@ namespace SGCellBar.Core.ViewModels
             }
         }
 
+        public ISGFactory Factory { get; set; }
+
         /// <summary>
         /// Gets or sets the view.
         /// </summary>
         public IBarCellView View { get; set; }
 
+        IMvxView IViewModel.View
+        {
+            get { return View; }
+            set { View = (IBarCellView)value; }
+        }
+
 	    public ICommand AddCommand
 	    {
             get { return new MvxCommand(AddBar); }
 	    }
-
-	    
+        
 
 	    /// <summary>
         /// Gets or sets the views.
         /// </summary>
-        public ObservableCollection<IBarViewModelBase> Views
+        public ObservableCollection<IViewModel> Views
 		{
 			get { return _barViews; }
 			set
@@ -69,7 +75,30 @@ namespace SGCellBar.Core.ViewModels
             get { return new MvxCommand(GoToPreviousView); }
         }
 
-		private void GoToNextView()
+	    public virtual void AddBarCell()
+        {
+            AddSubView<IBarViewModel, IBarCellView>();
+	    }
+
+	    public virtual void AddSubViewOne()
+        {
+            AddSubView<ISubViewModelOne, ISubViewOne>();
+	    }
+
+	    public virtual void AddSubViewTwo()
+	    {
+            AddSubView<ISubViewModelTwo, ISubViewTwo>();
+	    }
+
+	    private void AddSubView<TVM, TV>()
+        {
+            var viewModel = Factory.Create<ISubViewModelTwo, ISubViewTwo>();
+            if (viewModel == null) return;
+            var view = viewModel.View;
+            View.AddSubView(view);
+	    }
+
+	    private void GoToNextView()
 		{
 			RaisePropertyChanged(() => NextCommand);
 		}
@@ -119,7 +148,5 @@ namespace SGCellBar.Core.ViewModels
 
             //++i;
         }
-
-	    
 	}
 }

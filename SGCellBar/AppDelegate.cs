@@ -4,7 +4,6 @@ using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
-using SGCellBar.Core.ViewModels;
 using SGCellBar.UI;
 
 namespace SGCellBar

@@ -3,8 +3,10 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using SGCellBar.Core.Impl.ViewModels;
 using SGCellBar.Core.Interfaces;
-using SGCellBar.Core.ViewModels;
+using SGCellBar.Core.Interfaces.ViewModels;
+using SGCellBar.Core.Interfaces.Views;
 
 namespace SGCellBar.UI.Views.Cells
 {

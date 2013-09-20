@@ -22,6 +22,8 @@
     <ConsolePause>false</ConsolePause>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <MtouchI18n />
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <Optimize>true</Optimize>
@@ -42,6 +44,8 @@
     <ConsolePause>false</ConsolePause>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchI18n />
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -53,7 +57,6 @@
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -62,6 +65,8 @@
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <MtouchI18n />
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>full</DebugType>
@@ -115,6 +120,7 @@
   <ItemGroup>
     <Folder Include="Core\Models\" />
     <Folder Include="Core\Services\" />
+    <Folder Include="Core\ViewModels\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
@@ -122,21 +128,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\App.cs" />
-    <Compile Include="Core\Interfaces\IBarCellView.cs" />
-    <Compile Include="Core\Interfaces\IBarCollectionCellView.cs" />
-    <Compile Include="Core\Interfaces\IBarCollectionViewModel.cs" />
-    <Compile Include="Core\Interfaces\ISGFactory.cs" />
-    <Compile Include="Core\Interfaces\ISubViewModelOne.cs" />
-    <Compile Include="Core\Interfaces\ISubViewModelTwo.cs" />
-    <Compile Include="Core\Interfaces\ISubViewOne.cs" />
-    <Compile Include="Core\Interfaces\ISubViewTwo.cs" />
-    <Compile Include="Core\Interfaces\IView.cs" />
-    <Compile Include="Core\Interfaces\IViewHelper.cs" />
-    <Compile Include="Core\Interfaces\IViewModel.cs" />
-    <Compile Include="Core\ViewModels\BarViewModel.cs" />
-    <Compile Include="Core\ViewModels\BarViewModelTwo.cs" />
-    <Compile Include="Core\ViewModels\SubViewModelOne.cs" />
-    <Compile Include="Core\ViewModels\SubViewModelTwo.cs" />
+    <Compile Include="Core\Interfaces\ViewModels\IBarHolderViewModel.cs" />
+    <Compile Include="Core\Interfaces\Views\IBarHolderView.cs" />
+    <Compile Include="Core\Interfaces\Views\IBarCellView.cs" />
+    <Compile Include="Core\Interfaces\ViewModels\Common\ISGFactory.cs" />
+    <Compile Include="Core\Interfaces\ViewModels\ISubViewModelOne.cs" />
+    <Compile Include="Core\Interfaces\ViewModels\ISubViewModelTwo.cs" />
+    <Compile Include="Core\Interfaces\Views\ISubViewOne.cs" />
+    <Compile Include="Core\Interfaces\Views\ISubViewTwo.cs" />
+    <Compile Include="Core\Interfaces\Views\Common\IView.cs" />
+    <Compile Include="Core\Interfaces\Views\Common\IViewHelper.cs" />
+    <Compile Include="Core\Interfaces\ViewModels\Common\IViewModel.cs" />
+    <Compile Include="Core\Impl\ViewModels\BarViewModel.cs" />
+    <Compile Include="Core\Impl\ViewModels\SubViewModelOne.cs" />
+    <Compile Include="Core\Impl\ViewModels\SubViewModelTwo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="UI\Common\SGFactory.cs" />
@@ -144,13 +149,8 @@
     <Compile Include="UI\Setup.cs" />
     <Compile Include="UI\Views\Cells\BarCell.cs" />
     <Compile Include="UI\Views\Cells\BarCell.designer.cs" />
-    <Compile Include="Core\ViewModels\BarHolderViewModel.cs" />
-    <Compile Include="UI\Views\Cells\BarCollectionCell.cs" />
-    <Compile Include="UI\Views\Cells\BarCollectionCell.designer.cs">
-      <DependentUpon>BarCollectionCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\ViewModels\BarCollectionViewModel.cs" />
-    <Compile Include="Core\Interfaces\IBarViewModel.cs" />
+    <Compile Include="Core\Impl\ViewModels\BarHolderViewModel.cs" />
+    <Compile Include="Core\Interfaces\ViewModels\IBarViewModel.cs" />
     <Compile Include="UI\Views\FirstView.cs" />
     <Compile Include="UI\Views\SubviewOne.cs" />
     <Compile Include="UI\Views\SubviewOne.designer.cs">
@@ -172,7 +172,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <InterfaceDefinition Include="UI\Views\Cells\BarCell.xib" />
-    <InterfaceDefinition Include="UI\Views\Cells\BarCollectionCell.xib" />
     <InterfaceDefinition Include="UI\Views\SubviewOne.xib" />
     <InterfaceDefinition Include="UI\Views\SubviewTwo.xib" />
     <InterfaceDefinition Include="UI\Views\SubviewThree.xib" />

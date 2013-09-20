@@ -1,4 +1,4 @@
-﻿namespace SGCellBar.Core.Interfaces
+﻿namespace SGCellBar.Core.Interfaces.Views.Common
 {
     /// <summary>
     /// Helper methods for the views.

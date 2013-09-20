@@ -1,5 +1,8 @@
 ﻿using Cirrious.MvvmCross.ViewModels;
+using SGCellBar.Core.Impl.ViewModels;
 using SGCellBar.Core.Interfaces;
+using SGCellBar.Core.Interfaces.ViewModels;
+using SGCellBar.Core.Interfaces.ViewModels.Common;
 
 namespace SGCellBar.Core
 {
@@ -27,7 +30,7 @@ namespace SGCellBar.Core
         /// </summary>
 		public override void Initialize()
 		{
-			RegisterAppStart<ViewModels.BarHolderViewModel>();
+			RegisterAppStart<BarHolderViewModel>();
 		}
 
         /// <summary>

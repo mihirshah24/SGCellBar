@@ -2,16 +2,20 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
+using SGCellBar.Core.Impl.ViewModels;
 using SGCellBar.Core.Interfaces;
-using SGCellBar.Core.ViewModels;
+using SGCellBar.Core.Interfaces.ViewModels;
+using SGCellBar.Core.Interfaces.Views;
 using System.Linq;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.CrossCore;
 using SGCellBar.Core;
 using Cirrious.MvvmCross.Touch.Views;
+using SGCellBar.Core.Interfaces.Views.Common;
 using SGCellBar.UI.Common;
 
 namespace SGCellBar.UI.Views.Cells
@@ -70,6 +74,12 @@ namespace SGCellBar.UI.Views.Cells
         /// Gets or sets the view model.
         /// </summary>
         public IBarViewModel ViewModel { get; set; }
+
+        IMvxViewModel IMvxView.ViewModel
+        {
+            get { return ViewModel; }
+            set { ViewModel = (IBarViewModel)value; }
+        }
 
         private int SubViewCount
         {
@@ -131,55 +141,34 @@ namespace SGCellBar.UI.Views.Cells
             }
         }
 
-        private int i = 0;
+        public void AddSubView(IView subView)
+        {
+            var mvxViewController = subView as MvxViewController;
+            if (mvxViewController != null)
+            {                           
+                mvxViewController.View.ClipsToBounds = true;
+                mvxViewController.View.Hidden = false;
+                mvxViewController.View.Frame = new RectangleF(0, 0, 320, 200);
+                CollectionView.AddSubview(mvxViewController.View);
+                BringSubviewToFront(mvxViewController.View);
+            }
+        }
+        
+        partial void HandleButtonAddSubOneTouchUpInside(NSObject sender)
+        {
+            ViewModel.AddSubViewOne();
+        }
+
+
+        partial void HandleButtonAddSubTwoTouchUpInside(NSObject sender)
+        {
+            ViewModel.AddSubViewTwo();
+        }
+
 		// Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.
 		partial void HandleButtonAddTouchUpInside (NSObject sender)
 		{
-			//if (ViewModel == null) return;
-			//ViewModel.AddCommand.Execute(null);
-
-		    switch (i)
-		    {
-                case 0:
-                    var subViewModelOne = App.SGFactory.Create<ISubViewModelOne, ISubViewOne>();
-                    if (subViewModelOne != null)
-                    {
-                        var subViewOne = subViewModelOne.View as MvxViewController;
-                        if (subViewOne != null)
-                        {
-                            // TODO: Is there other way to fetch MvxViewModelRequest object?
-                            subViewOne.Request = SGFactory.Request;
-                            subViewOne.View.ClipsToBounds = true;
-						    subViewOne.View.Hidden = false;
-						    subViewOne.View.Frame = new RectangleF(0, 0, 320, 200);
-                            CollectionView.AddSubview(subViewOne.View);
-                            BringSubviewToFront(subViewOne.View);
-                        }
-                    }
-		            break;
-
-                case 1:
-                        //var subViewModelTwo = App.SGFactory.Create<ISubViewModelTwo, ISubViewTwo>();
-                        //if (subViewModelTwo != null)
-                        //{
-                        //    var subViewTwo = subViewModelTwo.View as MvxViewController;
-                        //    if (subViewTwo != null)
-                        //    {
-                        //        subViewTwo.Request = SGFactory.Request;
-                        //        subViewTwo.View.Hidden = false;
-                        //        subViewTwo.View.Frame = new RectangleF(0, 0, 320, 200);
-                        //        CollectionView.AddSubview(subViewTwo.View);
-                        //        BringSubviewToFront(subViewTwo.View);
-                        //    }
-                        //}
-		            break;
-
-                case 2:
-
-		            break;
-		    }
-
-		    ++i;
+            ViewModel.AddBarCell();
 		}
 
         // Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.
@@ -191,15 +180,12 @@ namespace SGCellBar.UI.Views.Cells
                 var subViewTwo = subViewModelTwo.View as MvxViewController;
                 if (subViewTwo != null)
                 {
-                    subViewTwo.Request = SGFactory.Request;
                     subViewTwo.View.Hidden = false;
                     subViewTwo.View.Frame = new RectangleF(0, 0, 320, 200);
                     CollectionView.AddSubview(subViewTwo.View);
                     BringSubviewToFront(subViewTwo.View);
                 }
             }
-
-			//GoToNextCollectionView();
 		}
 
         private void GoToNextCollectionView()

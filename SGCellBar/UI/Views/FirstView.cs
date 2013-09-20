@@ -1,18 +1,15 @@
 ﻿using System.Drawing;
-using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using SGCellBar.Core.ViewModels;
-using SGCellBar.UI.Common;
+using SGCellBar.Core;
+using SGCellBar.Core.Impl.ViewModels;
+using SGCellBar.Core.Interfaces.ViewModels;
+using SGCellBar.Core.Interfaces.Views;
+using SGCellBar.Core.Interfaces.Views.Common;
 using SGCellBar.UI.Views.Cells;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Touch.Views;
-using Cirrious.MvvmCross.Touch.Views.Presenters;
-using Cirrious.MvvmCross.ViewModels;
-using MonoTouch.UIKit;
 
 namespace SGCellBar.UI.Views
 {
@@ -20,7 +17,7 @@ namespace SGCellBar.UI.Views
     /// 
     /// </summary>
     [Register("FirstView")]
-    public class FirstView : MvxCollectionViewController
+    public class FirstView : MvxCollectionViewController//, IBarHolderView
     {
         private readonly bool _isInitialised;
         
@@ -36,8 +33,7 @@ namespace SGCellBar.UI.Views
             _isInitialised = true;
             ViewDidLoad();
         }
-
-
+        
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>
@@ -47,8 +43,20 @@ namespace SGCellBar.UI.Views
             set { base.ViewModel = value; }
         }
 
+        //IBarHolderViewModel IView<IBarHolderViewModel>.ViewModel
+        //{
+        //    get { return (IBarHolderViewModel)base.ViewModel; }
+        //    set { base.ViewModel = value; }
+        //}
+        
+        public void AddSubView(IView subView)
+        {
+            // Not Supported
+        }
+
         public sealed override void ViewDidLoad()
         {
+            
             if (!_isInitialised)
                 return;
 
@@ -58,13 +66,17 @@ namespace SGCellBar.UI.Views
             var source = new MvxCollectionViewSource(CollectionView, BarCell.Key);
             CollectionView.Source = source;
 
+            ViewModel.Factory = App.SGFactory;
+            ViewModel.Initialize();
+
             var set = this.CreateBindingSet<FirstView, BarHolderViewModel>();
             set.Bind(source).To(vm => vm.Bars);
             set.Apply();
 
             CollectionView.ReloadData();
 
-            SGFactory.Request = this.Request;
+            //SGFactory.Request = this.Request;
+
 
         }
     }

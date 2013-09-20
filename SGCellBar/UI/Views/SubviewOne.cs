@@ -1,4 +1,5 @@
 using Cirrious.MvvmCross.Touch.Views;
+using SGCellBar.Core.Interfaces.Views.Common;
 
 namespace SGCellBar.UI.Views
 {
@@ -16,42 +17,10 @@ namespace SGCellBar.UI.Views
         {
         }
 
-        public override void DidReceiveMemoryWarning()
+        public void AddSubView(IView subView)
         {
-            // Releases the view if it doesn't have a superview.
-            base.DidReceiveMemoryWarning();
-
-            // Release any cached data, images, etc that aren't in use.
+            // Not Supported
         }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            // Perform any additional setup after loading the view, typically from a nib.
-        }
-
-        //public class TableViewSource : MvxTableViewSource
-        //{
-        //    public TableViewSource(UITableView tableView)
-        //        : base(tableView)
-        //    {
-        //        tableView.RegisterNibForCellReuse(UINib.FromName("TwitterCell", NSBundle.MainBundle), TwitterCell.CellIdentifier);
-        //    }
-
-        //    public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
-        //    {
-        //        var item = GetItemAt(indexPath);
-        //        return TwitterCell.CellHeight(item);
-        //    }
-
-        //    protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
-        //    {
-        //        var cellName = TwitterCell.CellIdentifier;
-        //        return (UITableViewCell)tableView.DequeueReusableCell(cellName, indexPath);
-        //    }
-        //}
-        
 
 	}
 }
