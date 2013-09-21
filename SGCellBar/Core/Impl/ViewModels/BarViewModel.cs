@@ -5,6 +5,7 @@ using Cirrious.MvvmCross.Views;
 using SGCellBar.Core.Interfaces.ViewModels;
 using SGCellBar.Core.Interfaces.ViewModels.Common;
 using SGCellBar.Core.Interfaces.Views;
+using SGCellBar.Core.Interfaces.Views.Common;
 
 namespace SGCellBar.Core.Impl.ViewModels
 {
@@ -90,9 +91,11 @@ namespace SGCellBar.Core.Impl.ViewModels
             AddSubView<ISubViewModelTwo, ISubViewTwo>();
 	    }
 
-	    private void AddSubView<TVM, TV>()
+		private void AddSubView<TVM, TV>()
+			where TV : class, IView<TVM>
+				where TVM : class, IViewModel<TV>, IMvxViewModel
         {
-            var viewModel = Factory.Create<ISubViewModelTwo, ISubViewTwo>();
+            var viewModel = Factory.Create<TVM, TV>();
             if (viewModel == null) return;
             var view = viewModel.View;
             View.AddSubView(view);

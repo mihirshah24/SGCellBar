@@ -147,11 +147,8 @@
     <Compile Include="UI\Common\SGFactory.cs" />
     <Compile Include="UI\Common\ViewHelper.cs" />
     <Compile Include="UI\Setup.cs" />
-    <Compile Include="UI\Views\Cells\BarCell.cs" />
-    <Compile Include="UI\Views\Cells\BarCell.designer.cs" />
     <Compile Include="Core\Impl\ViewModels\BarHolderViewModel.cs" />
     <Compile Include="Core\Interfaces\ViewModels\IBarViewModel.cs" />
-    <Compile Include="UI\Views\FirstView.cs" />
     <Compile Include="UI\Views\SubviewOne.cs" />
     <Compile Include="UI\Views\SubviewOne.designer.cs">
       <DependentUpon>SubviewOne.cs</DependentUpon>
@@ -168,13 +165,27 @@
     <Compile Include="UI\Views\SubviewFour.designer.cs">
       <DependentUpon>SubviewFour.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\Cells\BarCell2.cs" />
+    <Compile Include="UI\Views\Cells\BarCell2.designer.cs">
+      <DependentUpon>BarCell2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\SecondView.cs" />
+    <Compile Include="UI\Views\SecondView.designer.cs">
+      <DependentUpon>SecondView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\BaseViewCell.cs" />
+    <Compile Include="UI\Views\BaseViewCell.designer.cs">
+      <DependentUpon>BaseViewCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
-    <InterfaceDefinition Include="UI\Views\Cells\BarCell.xib" />
     <InterfaceDefinition Include="UI\Views\SubviewOne.xib" />
     <InterfaceDefinition Include="UI\Views\SubviewTwo.xib" />
     <InterfaceDefinition Include="UI\Views\SubviewThree.xib" />
     <InterfaceDefinition Include="UI\Views\SubviewFour.xib" />
+    <InterfaceDefinition Include="UI\Views\Cells\BarCell2.xib" />
+    <InterfaceDefinition Include="UI\Views\SecondView.xib" />
+    <InterfaceDefinition Include="UI\Views\BaseViewCell.xib" />
   </ItemGroup>
 </Project>
