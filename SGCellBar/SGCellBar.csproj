@@ -177,6 +177,10 @@
     <Compile Include="UI\Views\BaseViewCell.designer.cs">
       <DependentUpon>BaseViewCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\Cells\BarCell3.cs" />
+    <Compile Include="UI\Views\Cells\BarCell3.designer.cs">
+      <DependentUpon>BarCell3.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
@@ -187,5 +191,6 @@
     <InterfaceDefinition Include="UI\Views\Cells\BarCell2.xib" />
     <InterfaceDefinition Include="UI\Views\SecondView.xib" />
     <InterfaceDefinition Include="UI\Views\BaseViewCell.xib" />
+    <InterfaceDefinition Include="UI\Views\Cells\BarCell3.xib" />
   </ItemGroup>
 </Project>

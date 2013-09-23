@@ -61,7 +61,7 @@ namespace SGCellBar
 				mvxViewController.View.ClipsToBounds = true;
 				mvxViewController.View.Hidden = false;
 
-				mvxViewController.View.Frame = new RectangleF(0, 0, 320, 200);
+				mvxViewController.View.Frame = new RectangleF(0, 0, 320, 400);
 				MainCollectionView.AddSubview(mvxViewController.View);
 				MainCollectionView.BringSubviewToFront(mvxViewController.View);
 			}
