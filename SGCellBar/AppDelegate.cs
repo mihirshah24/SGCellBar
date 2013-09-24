@@ -42,7 +42,7 @@ namespace SGCellBar
             _window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             // If you have defined a view, add it here:
-            // window.AddSubview (navigationController.View);
+            // window.AddSubview (navigationController.MyView);
             var presenter = new MvxTouchViewPresenter(this, _window);
             var setup = new Setup(this, presenter);
             setup.Initialize();

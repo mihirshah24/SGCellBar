@@ -1,54 +1,33 @@
-using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
+using Cirrious.CrossCore;
+using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Binding.Touch.Views;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Views;
+using SGCellBar.Core.Impl.ViewModels;
 using SGCellBar.Core.Interfaces.Views;
 using SGCellBar.Core.Interfaces.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.ViewModels;
 using System.ComponentModel;
 using System.Linq;
 using SGCellBar.Core.Interfaces.Views.Common;
 using SGCellBar.Core;
+using SGCellBar.UI.Common;
+using MonoTouch.CoreGraphics;
 
 namespace SGCellBar.UI.Views.Cells
 {
-	public partial class BarCell3 : MvxViewController, IBarCellView
+    public partial class BarCell3 : AbstractViewController<IBarViewModel, BarViewModel>, IBarCellView
 	{
         public static readonly UINib Nib = UINib.FromName("BarCell3", NSBundle.MainBundle);
         public static readonly NSString Key = new NSString("BarCell3");
-
+		
+		private bool _viewDidLoad;
 		public BarCell3 () : base ("BarCell3", null)
 		{
 		}
 
-		public override void DidReceiveMemoryWarning ()
-		{
-			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning ();
-			
-			// Release any cached data, images, etc that aren't in use.
-		}
-
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
-			
-			// Perform any additional setup after loading the view, typically from a nib.
-		}
-
-
-        /// <summary>
-        /// Gets or sets the view model.
-        /// </summary>
-        public new IBarViewModel ViewModel { get; set; }
-
-        IMvxViewModel IMvxView.ViewModel
-        {
-            get { return ViewModel; }
-            set { ViewModel = (IBarViewModel)value; }
-        }
 
         /// <summary>
         /// Creates this instance.
@@ -82,7 +61,27 @@ namespace SGCellBar.UI.Views.Cells
             // With Paging enabled, each view will snap to the edges of the frame as they scroll.
             CollectionView.PagingEnabled = true;
             CollectionView.ReloadData();
+        }
 
+        public override void ViewDidLoad()
+        {
+			_viewDidLoad = true;
+            base.ViewDidLoad();
+            MyViewModel.Factory = App.SGFactory;
+            MyViewModel.MyView = this;
+
+			CollectionView.RegisterClassForCell (typeof(BaseViewCell), BaseViewCell.Key);
+            //CollectionView.RegisterClassForCell(BaseViewCell.Nib, BaseViewCell.Key);
+            var source = new MvxCollectionViewSource(CollectionView, BaseViewCell.Key);
+            CollectionView.Source = source;
+
+            var set = this.CreateBindingSet<BarCell3, BarViewModel>();
+            set.Bind(source).To(vm => vm.Views);
+            set.Apply();
+
+            CollectionView.ReloadData();
+
+            //CollectionView.RegisterClassForCell(typeof(BaseViewCell), BaseViewCell.Key);
         }
 
         private void HandleBarViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -100,34 +99,73 @@ namespace SGCellBar.UI.Views.Cells
             }
         }
 
-        public void AddSubView(IView subView)
+
+	    public override void AddSubView(IView subView)
         {
-            var mvxViewController = subView as MvxViewController;
-            if (mvxViewController != null)
-            {
-                mvxViewController.View.ClipsToBounds = true;
-                mvxViewController.View.Hidden = false;
-                mvxViewController.View.Frame = new RectangleF(0, 0, 320, 200);
-                CollectionView.AddSubview(mvxViewController.View);
-                //BringSubviewToFront(mvxViewController.View);
-            }
+			//CollectionView.deque
+			var index = NSIndexPath.Create (new [] { 0, 0 });
+			var cell = (BaseViewCell)CollectionView.DequeueReusableCell(BaseViewCell.Key, index);
+            
+            
+
+            //var cell = CollectionView.Subviews[0];
+            //var cell2 = cell as BaseViewCell;
+            //var cell3 = cell as IBaseCellView;
+
+            //var mvxViewController = subView as MvxViewController;
+            //if (mvxViewController != null)
+            //{
+				//var viewToAdd = mvxViewController.View;
+                //mvxViewController.View.ClipsToBounds = true;
+                //mvxViewController.View.Hidden = false;
+                //mvxViewController.View.Frame = new RectangleF(0, 0, 320, 200);
+
+				//cell.Init();
+				//cell.AddSubView (subView);
+
+				//cell.ContentView.Transform = CGAffineTransform.MakeScale (0.8f, 0.8f);
+
+				//viewToAdd.Center = cell.ContentView.Center;
+
+                //cell.ContentView.AddSubview(mvxViewController.View);
+				//cell.BringSubviewToFront (mvxViewController.View);
+				//cell.AddSubview (mvxViewController.View);
+				//cell.BringSubviewToFront (mvxViewController.View);
+
+                //CollectionView.AddSubview(mvxViewController.View);
+                //CollectionView.BringSubviewToFront(mvxViewController.View);
+                //((BaseViewCell)cell).ContentView.AddSubview(mvxViewController.View);
+                //new UICollectionViewCell()
+                //CollectionView.AddSubview(mvxViewController.MyView);
+
+                //var newCell = new UICollectionViewCell();
+                //CollectionView.InsertItems(new NSIndexPath[0]);
+                //var cell = CollectionView.CellForItem(new NSIndexPath());
+                //CollectionView.AddSubview(mvxViewController.MyView);
+                //CollectionView.BringSubviewToFront(mvxViewController.MyView);
+
+                //BringSubviewToFront(mvxViewController.MyView);
+            //}
+
+			//CollectionView.ReloadItems (new[] { index });;
+			CollectionView.ReloadData ();
         }
 
         partial void HandleButtonAddS1TouchUpInside(NSObject sender)
         {
-            ViewModel.AddSubViewOne();
+            MyViewModel.AddSubViewOne();
         }
 
 
         partial void HandleButtonAddS2TouchUpInside(NSObject sender)
         {
-            ViewModel.AddSubViewTwo();
+            MyViewModel.AddSubViewTwo();
         }
 
         // Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.
         partial void HandleButtonAddBarTouchUpInside(NSObject sender)
         {
-            ViewModel.AddBarCell();
+            MyViewModel.AddBarCell();
         }
 
         // Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.
@@ -136,13 +174,13 @@ namespace SGCellBar.UI.Views.Cells
             var subViewModelTwo = App.SGFactory.Create<ISubViewModelTwo, ISubViewTwo>();
             if (subViewModelTwo != null)
             {
-                var subViewTwo = subViewModelTwo.View as MvxViewController;
+                var subViewTwo = subViewModelTwo.MyView as MvxViewController;
                 if (subViewTwo != null)
                 {
                     subViewTwo.View.Hidden = false;
                     subViewTwo.View.Frame = new RectangleF(0, 0, 320, 200);
                     CollectionView.AddSubview(subViewTwo.View);
-                    //BringSubviewToFront(subViewTwo.View);
+                    //BringSubviewToFront(subViewTwo.MyView);
                 }
             }
         }

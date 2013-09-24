@@ -3,7 +3,8 @@ using SGCellBar.Core.Interfaces.Views.Common;
 
 namespace SGCellBar.Core.Interfaces.Views
 {
-    public interface IBarCollectionCellView : IView<IBarCollectionViewModel>
+    public interface IBaseCellView : IView<IBaseCellViewModel>
     {
+        
     }
 }

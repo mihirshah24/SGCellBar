@@ -128,12 +128,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\App.cs" />
+    <Compile Include="Core\Impl\ViewModels\Common\AbstractViewModel.cs" />
+    <Compile Include="Core\Impl\ViewModels\BaseCellViewModel.cs" />
     <Compile Include="Core\Interfaces\ViewModels\IBarHolderViewModel.cs" />
+    <Compile Include="Core\Interfaces\ViewModels\IBaseCellViewModel.cs" />
     <Compile Include="Core\Interfaces\Views\IBarHolderView.cs" />
     <Compile Include="Core\Interfaces\Views\IBarCellView.cs" />
     <Compile Include="Core\Interfaces\ViewModels\Common\ISGFactory.cs" />
     <Compile Include="Core\Interfaces\ViewModels\ISubViewModelOne.cs" />
     <Compile Include="Core\Interfaces\ViewModels\ISubViewModelTwo.cs" />
+    <Compile Include="Core\Interfaces\Views\IBaseCellView.cs" />
     <Compile Include="Core\Interfaces\Views\ISubViewOne.cs" />
     <Compile Include="Core\Interfaces\Views\ISubViewTwo.cs" />
     <Compile Include="Core\Interfaces\Views\Common\IView.cs" />
@@ -144,6 +148,7 @@
     <Compile Include="Core\Impl\ViewModels\SubViewModelTwo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="UI\Common\AbstractViewController.cs" />
     <Compile Include="UI\Common\SGFactory.cs" />
     <Compile Include="UI\Common\ViewHelper.cs" />
     <Compile Include="UI\Setup.cs" />

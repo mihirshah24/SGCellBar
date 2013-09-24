@@ -1,6 +1,4 @@
 ﻿using MonoTouch.UIKit;
-using SGCellBar.Core.Interfaces;
-using SGCellBar.Core.Interfaces.Views;
 using SGCellBar.Core.Interfaces.Views.Common;
 
 namespace SGCellBar.UI.Common

@@ -9,15 +9,15 @@ namespace SGCellBar.Core.Interfaces.Views.Common
     }
 
     /// <summary>
-    /// Base View interface.
+    /// Base MyView interface.
     /// </summary>
-    /// <typeparam name="TVM">The type of the ViewModel</typeparam>
+    /// <typeparam name="TVM">The type of the MyViewModel</typeparam>
     public interface IView<TVM> : IView
         where TVM : class, IMvxViewModel
     {
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>
-        new TVM ViewModel { get; set; }
+        TVM MyViewModel { get; set; }
     }
 }

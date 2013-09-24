@@ -51,19 +51,23 @@ namespace SGCellBar
             //MainCollectionView.RegisterNibForCell(BarCell2.Nib, BarCell2.Key);
             //var source = new MvxCollectionViewSource(MainCollectionView, BarCell2.Key);
             //MainCollectionView.Source = source;
-			MainCollectionView.ReloadData ();
+			//MainCollectionView.ReloadData ();
             ViewModel.Factory = App.SGFactory;
-            var subView = ViewModel.Initialize();
-			
-			var mvxViewController = subView.View as MvxViewController;
+            var subViewModel = ViewModel.Initialize();
+		    var mvxViewController = subViewModel.MyView as UIViewController;
 			if (mvxViewController != null)
 			{                           
 				mvxViewController.View.ClipsToBounds = true;
 				mvxViewController.View.Hidden = false;
-
 				mvxViewController.View.Frame = new RectangleF(0, 0, 320, 400);
-				MainCollectionView.AddSubview(mvxViewController.View);
-				MainCollectionView.BringSubviewToFront(mvxViewController.View);
+                
+                //base.AddChildViewController(mvxViewController);
+                //this.AddChildViewController(mvxViewController);
+                //AddChildViewController(mvxViewController);
+                ScrollView.AddSubview(mvxViewController.View);
+                //Add(mvxViewController.MyView);
+				//MainCollectionView.AddSubview(mvxViewController.MyView);
+				//MainCollectionView.BringSubviewToFront(mvxViewController.MyView);
 			}
 
             //var set = this.CreateBindingSet<SecondView, BarHolderViewModel>();
@@ -71,6 +75,7 @@ namespace SGCellBar
             //set.Apply();
 
             //MainCollectionView.ReloadData();
+            ScrollView.ReloadInputViews();
 		}
 	}
 }

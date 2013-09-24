@@ -4,7 +4,7 @@ using SGCellBar.Core.Interfaces.Views;
 
 namespace SGCellBar.Core.Impl.ViewModels
 {
-    public class SubViewModelOne : AbstractViewModel<ISubViewOne>, ISubViewModelOne
+    public class BaseCellViewModel : AbstractViewModel<IBaseCellView>, IBaseCellViewModel
     {
     }
 }

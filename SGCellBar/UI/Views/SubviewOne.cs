@@ -10,7 +10,7 @@ namespace SGCellBar.UI.Views
         ///// <summary>
         ///// Gets or sets the view model.
         ///// </summary>
-        //public new ISubViewModelOne ViewModel { get; set; }
+        //public new ISubViewModelOne MyViewModel { get; set; }
 
 
         public SubviewOne() : base("SubviewOne", null)

@@ -30,7 +30,8 @@ namespace SGCellBar.Core
         /// </summary>
 		public override void Initialize()
 		{
-			RegisterAppStart<BarHolderViewModel>();
+			//RegisterAppStart<BarHolderViewModel>();
+			RegisterAppStart<BarViewModel> ();
 		}
 
         /// <summary>

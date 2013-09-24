@@ -26,6 +26,8 @@ namespace SGCellBar.UI.Common
             //{typeof(IBarCollectionCellView), typeof(BarCollectionCell)},
             //{typeof(IBarCollectionViewModel), typeof(BarCollectionViewModel)},
             {typeof(IBarViewModel), typeof(BarViewModel)},
+			{typeof(IBaseCellViewModel), typeof(BaseCellViewModel)},
+			{typeof(IBaseCellView), typeof(BaseViewCell)},
             //{typeof(IBarCellView), typeof(BarCell2)},
             {typeof(IBarCellView), typeof(BarCell3)},
             {typeof(ISubViewModelOne), typeof(SubViewModelOne)},
@@ -62,19 +64,26 @@ namespace SGCellBar.UI.Common
 
         {
             if (!Mvx.CanResolve<TVM>())
-                throw new Exception(string.Format("ViewModel Type {0} is not registered. Please register it before calling this method.", typeof(TVM)));
+                throw new Exception(string.Format("MyViewModel Type {0} is not registered. Please register it before calling this method.", typeof(TVM)));
 
             if (!Mvx.CanResolve<TV>())
-                throw new Exception(string.Format("View Type {0} is not registered. Please register it before calling this method.", typeof(TV)));
+                throw new Exception(string.Format("MyView Type {0} is not registered. Please register it before calling this method.", typeof(TV)));
 
 			var vc = Mvx.Resolve<IMvxViewsContainer> ();
-			vc.Add (typeof(TVM), SGFactory._association [typeof(TV)]);
-
-			var view = this.CreateViewControllerFor<TVM> ((object)null);
+			vc.Add (typeof(TVM), _association [typeof(TV)]);
+			
 			var viewModel = Mvx.Create<TVM> ();
-            viewModel.Factory = this;
-			view.ViewModel = viewModel;
-			viewModel.View = (TV)view;
+
+            try
+            {
+                var view = this.CreateViewControllerFor<TVM>((object) null);
+                viewModel.Factory = this;
+                view.ViewModel = viewModel;
+                viewModel.MyView = (TV) view;
+            }
+            catch (Exception)
+            {
+            }
 
             // Do other initialization here i.e. vm.init();
 

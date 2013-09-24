@@ -13,12 +13,20 @@ namespace SGCellBar
 	{
 		[Outlet]
 		MonoTouch.UIKit.UICollectionView MainCollectionView { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UIScrollView ScrollView { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
 			if (MainCollectionView != null) {
 				MainCollectionView.Dispose ();
 				MainCollectionView = null;
+			}
+
+			if (ScrollView != null) {
+				ScrollView.Dispose ();
+				ScrollView = null;
 			}
 		}
 	}

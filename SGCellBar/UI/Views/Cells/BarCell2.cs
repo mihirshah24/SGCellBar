@@ -33,12 +33,12 @@ namespace SGCellBar.UI.Views.Cells
 		/// <summary>
 		/// Gets or sets the view model.
 		/// </summary>
-		public new IBarViewModel ViewModel { get; set; }
+		public IBarViewModel MyViewModel { get; set; }
 
 		IMvxViewModel IMvxView.ViewModel
 		{
-			get { return ViewModel; }
-			set { ViewModel = (IBarViewModel)value; }
+			get { return MyViewModel; }
+			set { MyViewModel = (IBarViewModel)value; }
 		}
 
 		private int SubViewCount
@@ -110,25 +110,25 @@ namespace SGCellBar.UI.Views.Cells
 				mvxViewController.View.Hidden = false;
 				mvxViewController.View.Frame = new RectangleF(0, 0, 320, 200);
 				CollectionView.AddSubview(mvxViewController.View);
-				//BringSubviewToFront(mvxViewController.View);
+				//BringSubviewToFront(mvxViewController.MyView);
 			}
 		}
 
 		partial void HandleButtonAddSubView1TouchUpInside(NSObject sender)
 		{
-			ViewModel.AddSubViewOne();
+			MyViewModel.AddSubViewOne();
 		}
 
 
 		partial void HandleButtonAddSubView2TouchUpInside(NSObject sender)
 		{
-			ViewModel.AddSubViewTwo();
+			MyViewModel.AddSubViewTwo();
 		}
 
 		// Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.
 		partial void HandleButtonAddBarCellTouchUpInside (NSObject sender)
 		{
-			ViewModel.AddBarCell();
+			MyViewModel.AddBarCell();
 		}
 
 		// Do NOT remove this handler even if ReSharper cannot find it's usage. It is referred in BarCell.designer.cs file by its name. That's how Xamarin is linking the event on the button.
@@ -137,13 +137,13 @@ namespace SGCellBar.UI.Views.Cells
 			var subViewModelTwo = App.SGFactory.Create<ISubViewModelTwo, ISubViewTwo>();
 			if (subViewModelTwo != null)
 			{
-				var subViewTwo = subViewModelTwo.View as MvxViewController;
+				var subViewTwo = subViewModelTwo.MyView as MvxViewController;
 				if (subViewTwo != null)
 				{
 					subViewTwo.View.Hidden = false;
 					subViewTwo.View.Frame = new RectangleF(0, 0, 320, 200);
 					CollectionView.AddSubview(subViewTwo.View);
-					//BringSubviewToFront(subViewTwo.View);
+					//BringSubviewToFront(subViewTwo.MyView);
 				}
 			}
 		}

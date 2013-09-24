@@ -16,7 +16,7 @@ namespace SGCellBar.Core.Interfaces.ViewModels
         /// <summary>
         /// Gets or sets the views.
         /// </summary>
-        ObservableCollection<IViewModel> Views { get; set; }
+        ObservableCollection<IBaseCellViewModel> Views { get; set; }
 
         /// <summary>
         /// Gets the next command.
