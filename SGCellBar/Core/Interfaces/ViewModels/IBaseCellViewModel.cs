@@ -1,3 +1,4 @@
+using Cirrious.MvvmCross.ViewModels;
 using SGCellBar.Core.Interfaces.ViewModels.Common;
 using SGCellBar.Core.Interfaces.Views;
 

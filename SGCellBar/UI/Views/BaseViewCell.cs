@@ -2,14 +2,13 @@ using System;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
+using MonoTouch.CoreGraphics;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using SGCellBar.Core.Impl.ViewModels;
 using SGCellBar.Core.Interfaces.ViewModels;
 using SGCellBar.Core.Interfaces.Views;
 using SGCellBar.Core.Interfaces.Views.Common;
-using Cirrious.MvvmCross.Touch.Views;
-using System.Drawing;
 
 namespace SGCellBar.UI.Views
 {
@@ -28,8 +27,17 @@ namespace SGCellBar.UI.Views
                 //set.Bind(ButtonLeft).To(p => p.PreviousCommand);
                 set.Apply();
             });
-						
-			//BackgroundView = new UIView { BackgroundColor = UIColor.Orange };
+
+            //BackgroundView = new UIView { BackgroundColor = UIColor.Orange };
+
+            //SelectedBackgroundView = new UIView { BackgroundColor = UIColor.Green };
+
+            //ContentView.Layer.BorderColor = UIColor.LightGray.CGColor;
+            //ContentView.Layer.BorderWidth = 2.0f;
+            //ContentView.BackgroundColor = UIColor.White;
+            //ContentView.Transform = CGAffineTransform.MakeScale(0.8f, 0.8f);
+
+            //BackgroundView = new UIView { BackgroundColor = UIColor.Orange };
 			//SelectedBackgroundView = new UIView { BackgroundColor = UIColor.Red };
 			//ContentView.Layer.BorderColor = UIColor.LightGray.CGColor;
 			//ContentView.Layer.BorderWidth = 2.0f;
@@ -37,18 +45,24 @@ namespace SGCellBar.UI.Views
 		}
 
 
-		public static BaseViewCell Create ()
-		{
-			var cell = (BaseViewCell)Nib.Instantiate (null, null) [0];
-			return cell;
-		}
+        //public static BaseViewCell Create ()
+        //{
+        //    var cell = (BaseViewCell)Nib.Instantiate (null, null) [0];
+        //    return cell;
+        //}
 
 		public IMvxViewModel ViewModel { get; set; }
 		
 		public IBaseCellViewModel MyViewModel
 		{
-			get { return (IBaseCellViewModel)ViewModel; }
-			set { ViewModel = value; }
+			get
+			{
+			    return (IBaseCellViewModel)ViewModel;
+			}
+			set
+			{
+			    ViewModel = value;
+			}
 		}
         /// <summary>
         /// Gets or sets the data context.

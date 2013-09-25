@@ -29,14 +29,14 @@ namespace SGCellBar.UI.Views.Cells
 		}
 
 
-        /// <summary>
-        /// Creates this instance.
-        /// </summary>
-        /// <returns><see cref="BarCell3"/></returns>
-        public static BarCell3 Create()
-        {
-            return (BarCell3) Nib.Instantiate(null, null)[0];
-        }
+        ///// <summary>
+        ///// Creates this instance.
+        ///// </summary>
+        ///// <returns><see cref="BarCell3"/></returns>
+        //public static BarCell3 Create()
+        //{
+        //    return (BarCell3) Nib.Instantiate(null, null)[0];
+        //}
 
         /// <summary>
         /// To be added.
@@ -70,14 +70,20 @@ namespace SGCellBar.UI.Views.Cells
             MyViewModel.Factory = App.SGFactory;
             MyViewModel.MyView = this;
 
-			CollectionView.RegisterClassForCell (typeof(BaseViewCell), BaseViewCell.Key);
-            //CollectionView.RegisterClassForCell(BaseViewCell.Nib, BaseViewCell.Key);
+            //CollectionView.RegisterClassForCell(typeof(BaseViewCell), BaseViewCell.Key);
+            CollectionView.RegisterNibForCell(BaseViewCell.Nib, BaseViewCell.Key);
             var source = new MvxCollectionViewSource(CollectionView, BaseViewCell.Key);
             CollectionView.Source = source;
 
             var set = this.CreateBindingSet<BarCell3, BarViewModel>();
             set.Bind(source).To(vm => vm.Views);
             set.Apply();
+
+            //CollectionView.CollectionViewLayout = new UICollectionViewFlowLayout
+            //                                          {
+            //                                              ItemSize = new SizeF(320, 400),
+            //                                              ScrollDirection = UICollectionViewScrollDirection.Horizontal,
+            //                                          };
 
             CollectionView.ReloadData();
 
@@ -104,7 +110,24 @@ namespace SGCellBar.UI.Views.Cells
         {
 			//CollectionView.deque
 			var index = NSIndexPath.Create (new [] { 0, 0 });
-			var cell = (BaseViewCell)CollectionView.DequeueReusableCell(BaseViewCell.Key, index);
+            var cell = CollectionView.DequeueReusableCell(BaseViewCell.Key, index) as UICollectionViewCell;
+            if (cell != null)
+            {
+                //var view = ((MvxViewController) subView).View;
+                //view.Hidden = false;
+                //view.Frame = new RectangleF(0, 0, 320, 320);
+                //cell.ContentView.Add(view);
+
+                var view = new UILabel();
+                view.Text = "Content View";
+                view.Hidden = false;
+                view.Frame = new RectangleF(0, 0, 320, 50);
+               
+                cell.ContentView.AddSubview(view);
+                cell.ContentView.BringSubviewToFront(view);
+
+            }
+           
             
             
 
